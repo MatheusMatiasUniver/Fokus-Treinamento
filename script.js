@@ -28,32 +28,6 @@ somPause.volume = 0.1;
 somPlay.volume = 0.1;
 somBeep.volume = 0.1;
 
-musicaInput.addEventListener('change', () => {
-    if (musica.paused) {
-        musica.play()
-    } else {
-        musica.pause()
-    }
-})
-
-btFoco.addEventListener('click', () => {
-    mudaContexto('foco');
-
-    btFoco.classList.add('active');
-})
-
-btCurto.addEventListener('click', () => {
-    mudaContexto('descanso-curto');
-
-    btCurto.classList.add('active');
-})
-
-btLongo.addEventListener('click', () => {
-    mudaContexto('descanso-longo');
-
-    btLongo.classList.add('active');
-})
-
 function mudaContexto(contexto) {
     botoes.forEach(function (contexto) {
         contexto.classList.remove('active');
@@ -82,7 +56,7 @@ function mudaContexto(contexto) {
     tempoNaTela();
 }
 
-const timerFoco = () => {
+function timerFoco() {
     if (tempoEmSegundos <= 0) {
         somBeep.play();
         zerar();        
@@ -92,8 +66,6 @@ const timerFoco = () => {
     tempoEmSegundos -= 1;
     tempoNaTela();       
 }
-
-btStartPause.addEventListener('click', startPause) 
 
 function startPause() {
     if (intervaloId) {
@@ -119,5 +91,33 @@ function tempoNaTela() {
     const tempoFormatado = tempo.toLocaleString('pt-Br', {minute: '2-digit', second: '2-digit'});
     timer.innerHTML = `${tempoFormatado}`;
 }
+
+musicaInput.addEventListener('change', () => {
+    if (musica.paused) {
+        musica.play()
+    } else {
+        musica.pause()
+    }
+})
+
+btFoco.addEventListener('click', () => {
+    mudaContexto('foco');
+
+    btFoco.classList.add('active');
+})
+
+btCurto.addEventListener('click', () => {
+    mudaContexto('descanso-curto');
+
+    btCurto.classList.add('active');
+})
+
+btLongo.addEventListener('click', () => {
+    mudaContexto('descanso-longo');
+
+    btLongo.classList.add('active');
+})
+
+btStartPause.addEventListener('click', startPause) 
 
 tempoNaTela();
